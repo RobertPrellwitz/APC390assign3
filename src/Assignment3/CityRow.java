@@ -2,14 +2,31 @@ package Assignment3;
 
 public class CityRow extends AbstractRow{
     private String City;
-    private int id;
-    private double population;
+    private String id;
+    private String population;
 
-    CityRow(String City, int cityId, double cityPop ){
-        this.City = City;
-        this.id = cityId;
-        this.population = cityPop;
+    private String [] cityRow = new String [3];
 
+    CityRow(String City, String cityId, String cityPop ){
+        cityRow[0] = City;
+        cityRow[1] = cityId;
+        cityRow[2] = cityPop;
+
+    }
+
+    protected String getCityName(){
+        String cityName = cityRow[0];
+        return cityName;
+    }
+
+    protected String getCityID(){
+        String cityId = cityRow[1];
+        return cityId;
+    }
+
+    protected String getCityPop(){
+        String cityPop = cityRow[2];
+        return cityPop;
     }
 
     public void equal(CityRow row){
