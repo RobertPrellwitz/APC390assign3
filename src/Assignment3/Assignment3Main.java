@@ -40,17 +40,17 @@ public class Assignment3Main {
         JOptionPane.showMessageDialog(null,developerMessage);
         JOptionPane.showMessageDialog(null, welcomeMessage);
         TextTable mytexttable = new TextTable();
-        StadiumTable myStadium = new StadiumTable();
-        CityTable myCity = new CityTable();
+        AbstractTable myStadium = new StadiumTable();
+        AbstractTable myCity = new CityTable();
 
         int userSelection = 0;
         while (userSelection != QUIT) {
             userSelection = Integer.parseInt(JOptionPane.showInputDialog(promptMessage));
-            processSelection(mytexttable, userSelection);
+            processSelection(myCity, userSelection);
         }
     }
 
-    private static void processSelection(TextTable mytable, int userSelection) throws IOException {
+    private static void processSelection(AbstractTable mytable, int userSelection) throws IOException {
         switch (userSelection) {
             case LOAD:
                 // Remember that you can have text files in your Eclipse Project
@@ -70,19 +70,19 @@ public class Assignment3Main {
                 mytable.saveTableToFile(fileName);
                 break;
             case ADD_ROW:
-                String number = JOptionPane.showInputDialog("Please enter the number you want to add to the table");
-                String name = JOptionPane.showInputDialog("Please enter the name for " + number);
-                String value = JOptionPane.showInputDialog("Please enter the value for " + number);
-                mytable.addRow(number, name, value);
+                // String number = JOptionPane.showInputDialog("Please enter the number you want to add to the table");
+                // String name = JOptionPane.showInputDialog("Please enter the name for " + number);
+                // String value = JOptionPane.showInputDialog("Please enter the value for " + number);
+                mytable.addRow();
                 break;
             case REMOVE_ROW:
                 //String Table = TextTable.displayData();
                 int num = Integer.parseInt( JOptionPane
                         .showInputDialog("Please enter the number in the row you want to remove from the table\n\n" )); //+ Table
-                mytable.removeRow(num);
+                mytable.removeRow();
                 break;
             case FIND_ROW:
-                name = JOptionPane.showInputDialog("Please enter the name in the row you want to find.");
+                String name = JOptionPane.showInputDialog("Please enter the name in the row you want to find.");
                 JOptionPane.showMessageDialog(null, mytable.findRow(name));
                 break;
             case QUIT:

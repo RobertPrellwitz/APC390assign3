@@ -22,6 +22,26 @@ public class StadiumRow extends AbstractRow {
         stadiumRow[3] = zipCode;
     }
 
+    protected String getStadiumName(){
+        String stadiumName = stadiumRow[0];
+        return stadiumName;
+    }
+
+    protected String getStadiumId(){
+      String stadiumId = stadiumRow[1];
+      return stadiumId;
+    }
+
+    protected String getCity(){
+        String city = stadiumRow[2];
+        return city;
+    }
+
+    protected String getZipCode(){
+        String zipCode = stadiumRow[3];
+        return zipCode;
+    }
+
     public void equal(StadiumRow row){
 
     }
