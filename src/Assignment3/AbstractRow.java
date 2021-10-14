@@ -1,6 +1,6 @@
 package Assignment3;
 
-public class AbstractRow {
+public abstract class AbstractRow {
 
 
     public void equal(){}

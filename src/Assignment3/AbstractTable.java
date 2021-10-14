@@ -17,4 +17,6 @@ public abstract class AbstractTable {
     };
    public void addRow(){};
    public void removeRow(){};
+   public String displayData(){String data = ""; return data;};
+   //public int selection () {int select = 0; return select;}
 }

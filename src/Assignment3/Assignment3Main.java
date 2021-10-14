@@ -15,7 +15,8 @@ import java.io.IOException;
  */
 
 public class Assignment3Main {
-    static final int LOAD = 1, SAVE = 2, ADD_ROW = 3, REMOVE_ROW = 4, FIND_ROW = 5, QUIT = 6;
+    static final int LOAD = 1, SAVE = 2, ADD_ROW = 3, REMOVE_ROW = 4, FIND_ROW = 5, DISPLAY_TABLE = 6,QUIT = 7;
+    static final int STADIUM = 1, CITY = 2, END = 3;
 
     static final String welcomeMessage = "This program implements an interactive table builder.\n"
             + "You can add new rows or remove rows from tables.\n"
@@ -34,7 +35,15 @@ public class Assignment3Main {
             + "   " + ADD_ROW + ": Add a row to the current table\n"
             + "   " + REMOVE_ROW + ": Remove a row from the current table\n"
             + "   " + FIND_ROW + ": Find a row\n"
+            + "   " + DISPLAY_TABLE + ": Display current Table.\n"
             + "   " + QUIT + ": Quit\n";
+
+    static final String tableChoice = "There are the two table types available:\n"
+            + "City Data & Stadium data.\n"
+            + "Please select what you want to work on:\n"
+            + "   " + STADIUM +":  Stadium Data\n"
+            + "   " + CITY +":  City Data\n"
+            + "   " + END + ":  End Program";
 
     public static void main(String[] args) throws IOException {
         JOptionPane.showMessageDialog(null,developerMessage);
@@ -43,11 +52,38 @@ public class Assignment3Main {
         AbstractTable myStadium = new StadiumTable();
         AbstractTable myCity = new CityTable();
 
-        int userSelection = 0;
-        while (userSelection != QUIT) {
-            userSelection = Integer.parseInt(JOptionPane.showInputDialog(promptMessage));
-            processSelection(myCity, userSelection);
+        int tableSelection =0;
+
+        while (tableSelection!= END) {
+            tableSelection = Integer.parseInt(JOptionPane.showInputDialog(tableChoice));
+            AbstractTable myTable = tableSet(tableSelection);
+            int userSelection = 0;
+            while ((userSelection != QUIT) && (tableSelection != END)) {
+                userSelection = Integer.parseInt(JOptionPane.showInputDialog(promptMessage));
+                processSelection(myTable, userSelection);
+            }
         }
+    }
+
+    private static AbstractTable tableSet(int tableChoice)throws IOException{
+        AbstractTable userTable = new CityTable();
+
+        switch (tableChoice){
+            case STADIUM:
+                userTable = new StadiumTable();
+                break;
+            case CITY:
+                userTable = new CityTable();
+                break;
+            case END:
+                JOptionPane.showMessageDialog(null, "Thank you for using our program."
+                + "\nREP Computing Services. \n\n DON'T PANIC\n\n");
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Invalid Input");
+                break;
+        }
+        return userTable;
     }
 
     private static void processSelection(AbstractTable mytable, int userSelection) throws IOException {
@@ -76,15 +112,17 @@ public class Assignment3Main {
                 mytable.addRow();
                 break;
             case REMOVE_ROW:
-                //String Table = TextTable.displayData();
-                int num = Integer.parseInt( JOptionPane
-                        .showInputDialog("Please enter the number in the row you want to remove from the table\n\n" )); //+ Table
+//                String Table = mytable.displayData();
+//                int num = Integer.parseInt( JOptionPane
+//                        .showInputDialog("Please enter the number in the row you want to remove from the table\n\n" )); //+ Table
                 mytable.removeRow();
                 break;
             case FIND_ROW:
                 String name = JOptionPane.showInputDialog("Please enter the name in the row you want to find.");
                 JOptionPane.showMessageDialog(null, mytable.findRow(name));
                 break;
+            case DISPLAY_TABLE:
+                JOptionPane.showMessageDialog(null,mytable.displayData());
             case QUIT:
                 JOptionPane.showMessageDialog(null, "Have a nice day");
                 break;

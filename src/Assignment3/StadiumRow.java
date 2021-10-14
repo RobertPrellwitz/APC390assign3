@@ -3,22 +3,22 @@ package Assignment3;
 public class StadiumRow extends AbstractRow {
     private String stadiumName;
     private int id;
-    private String city;
+    private String teamName;
     private int zip;
 
     private String [] stadiumRow = new String [4];
 
-    StadiumRow(String stadium, int stadiumId, String cityName, int zipCode){
+    StadiumRow(String stadium, int stadiumId, String teamName, int zipCode){
         this.stadiumName = stadium;
         this.id = stadiumId;
-        this.city = cityName;
+        this.teamName = teamName;
         this.zip = zipCode;
     }
 
-    StadiumRow(String Stadium, String StadiumId, String cityName, String zipCode){
+    StadiumRow(String Stadium, String StadiumId, String teamName, String zipCode){
         stadiumRow[0] = Stadium;
         stadiumRow[1] = StadiumId;
-        stadiumRow[2] = cityName;
+        stadiumRow[2] = teamName;
         stadiumRow[3] = zipCode;
     }
 
@@ -32,9 +32,9 @@ public class StadiumRow extends AbstractRow {
       return stadiumId;
     }
 
-    protected String getCity(){
-        String city = stadiumRow[2];
-        return city;
+    protected String getTeam(){
+        String teamName = stadiumRow[2];
+        return teamName;
     }
 
     protected String getZipCode(){

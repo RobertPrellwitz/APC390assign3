@@ -14,7 +14,7 @@ public class CityTable extends AbstractTable{
     private static int counter = 0;
 
     public void loadTableFromFile (String fileName) throws IOException {
-        Scanner loadFile = null; loadFile = new Scanner(new FileReader("data/" + fileName));
+        Scanner loadFile = null; loadFile = new Scanner(new FileReader(fileName));
         String input ;
         try {
             header = loadFile.nextLine();
@@ -24,7 +24,7 @@ public class CityTable extends AbstractTable{
                     boolean isEmpty = (input == null || input.trim().isEmpty());
 
                     if (!isEmpty) {
-                        String[] array = input.split("\t", 3);
+                        String[] array = input.split("\\s*,\\s*", 3);
                         cities[counter] = new CityRow(array[0], array[1], array[2]);
                         counter++;
                     }
@@ -53,7 +53,7 @@ public class CityTable extends AbstractTable{
             city = array.getCityName();
             cityId = array.getCityID();
             population = array.getCityPop();
-            fileOutput.println( city + "\t"  + cityId + "\t"  + population );
+            fileOutput.println( city + "\\s*,\\s*"  + cityId + "\\s*,\\s*"  + population );
         }
         fileOutput.close();
     }
