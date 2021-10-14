@@ -61,7 +61,20 @@ public class StadiumTable extends AbstractTable {
         String stadiumId = JOptionPane.showInputDialog("Please enter the Id for " + stadium);
         String cityName = JOptionPane.showInputDialog("Please enter the name of the Team that uses the stadium.");
         String zipCode = JOptionPane.showInputDialog("Please enter the zip code the Stadium resides in:");
-        if (counter < 100) {
+        StadiumRow newRow = new StadiumRow(stadium,stadiumId,cityName,zipCode);
+        boolean duplicate = false;
+        int count = 0;
+        while (!duplicate && count < counter){
+            StadiumRow check = stadiums[count];
+            System.out.println( "Table Team: " + check.getTeam());
+            System.out.println("New Team" + newRow.getTeam());
+            duplicate = check.equals(newRow);
+            count++;
+        }
+        if (duplicate){
+            JOptionPane.showMessageDialog(null, "This a duplicate item - data can't be added");
+        }
+        else if (counter < 100) {
             stadiums[counter] = new StadiumRow(stadium, stadiumId, cityName, zipCode);
             counter++;
         } else {

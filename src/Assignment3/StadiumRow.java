@@ -42,7 +42,13 @@ public class StadiumRow extends AbstractRow {
         return zipCode;
     }
 
-    public void equal(StadiumRow row){
-
+    /// This checks to see if the Stadium being added is the same as another based on Team & StadiumId
+    /// This allows for a stadium to exist with multiple Teams and have a multiple listings based on ID and Team
+    public boolean equals(StadiumRow row) {
+        boolean check = false;
+        if (this.getTeam().equals(row.getTeam()) || this.getStadiumId() == row.getStadiumId()) {
+            check = true;
+        }
+        return check;
     }
 }
