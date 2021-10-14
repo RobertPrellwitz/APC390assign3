@@ -15,8 +15,10 @@ import java.io.IOException;
  */
 
 public class Assignment3Main {
-    static final int LOAD = 1, SAVE = 2, ADD_ROW = 3, REMOVE_ROW = 4, FIND_ROW = 5, DISPLAY_TABLE = 6,QUIT = 7;
+    static final int LOAD = 1, SAVE = 2, ADD_ROW = 3, REMOVE_ROW = 4, FIND_ROW = 5, DISPLAY_TABLE = 6, QUIT = 7;
     static final int STADIUM = 1, CITY = 2, END = 3;
+    static final AbstractTable myStadium = new StadiumTable();
+    static final AbstractTable myCity = new CityTable();
 
     static final String welcomeMessage = "This program implements an interactive table builder.\n"
             + "You can add new rows or remove rows from tables.\n"
@@ -26,7 +28,7 @@ public class Assignment3Main {
     static final String developerMessage = "Program enhanced and improved by:\n"
             + "Robert Prellwitz\n"
             + "APC 390 Fall 21 Semester\n"
-            + "September 12, 2021";
+            + "October 12, 2021";
 
     static final String promptMessage = "What would you like to do?\n"
             + "Please enter the number corresponding to the action you would like:\n"
@@ -48,11 +50,8 @@ public class Assignment3Main {
     public static void main(String[] args) throws IOException {
         JOptionPane.showMessageDialog(null,developerMessage);
         JOptionPane.showMessageDialog(null, welcomeMessage);
-        TextTable mytexttable = new TextTable();
-        AbstractTable myStadium = new StadiumTable();
-        AbstractTable myCity = new CityTable();
 
-        int tableSelection =0;
+        int tableSelection = 0;
 
         while (tableSelection!= END) {
             tableSelection = Integer.parseInt(JOptionPane.showInputDialog(tableChoice));
@@ -65,23 +64,29 @@ public class Assignment3Main {
         }
     }
 
-    private static AbstractTable tableSet(int tableChoice)throws IOException{
-        AbstractTable userTable = new CityTable();
+    private static AbstractTable tableSet(int tableChoice)throws Error {
+        AbstractTable userTable = null;
 
-        switch (tableChoice){
-            case STADIUM:
-                userTable = new StadiumTable();
-                break;
-            case CITY:
-                userTable = new CityTable();
-                break;
-            case END:
-                JOptionPane.showMessageDialog(null, "Thank you for using our program."
-                + "\nREP Computing Services. \n\n DON'T PANIC\n\n");
-                break;
-            default:
-                JOptionPane.showMessageDialog(null, "Invalid Input");
-                break;
+        try {
+            switch (tableChoice) {
+                case STADIUM:
+                    userTable = myStadium;
+                    break;
+                case CITY:
+                    userTable = myCity;
+                    break;
+                case END:
+                    JOptionPane.showMessageDialog(null, "Thank you for using our program."
+                            + "\nREP Computing Services. \n\n DON'T PANIC\n\n");
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Invalid Input");
+                    break;
+            }
+
+        }
+        catch(Error exp) {
+            JOptionPane.showMessageDialog(null, "Error Selecting Table Type" + exp);
         }
         return userTable;
     }
@@ -89,10 +94,6 @@ public class Assignment3Main {
     private static void processSelection(AbstractTable mytable, int userSelection) throws IOException {
         switch (userSelection) {
             case LOAD:
-                // Remember that you can have text files in your Eclipse Project
-                // If this file is in src/a1, you could read the input.txt file in your a1
-                // package
-                // using the "fileName" src/a1/input.txt
                 String fileName = JOptionPane.showInputDialog("Please enter the name of the text file to load");
                 System.out.println("Opening the file '" + fileName + "'.");
                 try {
@@ -106,15 +107,9 @@ public class Assignment3Main {
                 mytable.saveTableToFile(fileName);
                 break;
             case ADD_ROW:
-                // String number = JOptionPane.showInputDialog("Please enter the number you want to add to the table");
-                // String name = JOptionPane.showInputDialog("Please enter the name for " + number);
-                // String value = JOptionPane.showInputDialog("Please enter the value for " + number);
                 mytable.addRow();
                 break;
             case REMOVE_ROW:
-//                String Table = mytable.displayData();
-//                int num = Integer.parseInt( JOptionPane
-//                        .showInputDialog("Please enter the number in the row you want to remove from the table\n\n" )); //+ Table
                 mytable.removeRow();
                 break;
             case FIND_ROW:
@@ -124,7 +119,7 @@ public class Assignment3Main {
             case DISPLAY_TABLE:
                 JOptionPane.showMessageDialog(null,mytable.displayData());
             case QUIT:
-                JOptionPane.showMessageDialog(null, "Have a nice day");
+                JOptionPane.showMessageDialog(null, "Returning to Main Menu");
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "Invalid Input");

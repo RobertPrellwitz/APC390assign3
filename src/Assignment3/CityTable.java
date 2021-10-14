@@ -53,14 +53,15 @@ public class CityTable extends AbstractTable{
             city = array.getCityName();
             cityId = array.getCityID();
             population = array.getCityPop();
-            fileOutput.println( city + "\\s*,\\s*"  + cityId + "\\s*,\\s*"  + population );
+            fileOutput.println( city + ", "  + cityId + ", "  + population );
         }
         fileOutput.close();
     }
+
     public void addRow(){
         String city = JOptionPane.showInputDialog("Please enter the City you want to add to the table");
         String cityId = JOptionPane.showInputDialog("Please enter the Id for " + city);
-         String population = JOptionPane.showInputDialog("Please enter the population for " + city);
+         String population = JOptionPane.showInputDialog("Please enter the population in millions for " + city);
         if (counter < 100){
             cities[counter]= new CityRow(city,cityId,population);
             counter++;
@@ -70,7 +71,29 @@ public class CityTable extends AbstractTable{
         }
     };
 
-    public void removeRow(){};
+    public void removeRow(){
+        int numberToRemoveFromTable= selection();
+        CityRow array;
+        int temp =- 1;
+        int range = counter;
+        int number;
+        for (int i = 0; i < range; i++){
+            array = cities[i];
+            number = Integer.parseInt(array.getCityID());
+            if (number == numberToRemoveFromTable){
+                temp = i;
+                break;
+            }
+        }
+        if (temp != -1)
+        {
+            for (int j = temp; j < (range -1); j++ )
+            {
+                cities[j] = cities[j+1];
+            }
+            counter--;
+        }
+    };
 
     public String findRow(String name){
         name.toLowerCase();
@@ -84,11 +107,27 @@ public class CityTable extends AbstractTable{
             break;
             }
             else{
-                row = "Name not found!   Sorry!\nPlease try again!";
+                row = name +" not found!   Sorry!\nPlease try again!";
                 continue;
             }
         }
         return row;
+    }
+    public String displayData(){
+        String display=String.format("\n%-30s%-50s%-50s","City Id","City Name","Population");
+        CityRow array;
+        for(int i = 0; i < counter; i++){
+            array = cities[i];
+            display = display + (String.format("\n%-30s%-50s%-50s" , array.getCityID(), array.getCityName(), array.getCityPop()));
+        }
+        return display;
+    }
+
+    public int selection(){
+        int selection = 0;
+        selection = Integer.parseInt(JOptionPane.showInputDialog(displayData()
+                + "\nPlease enter the Stadium ID you would like to remove:"));
+        return selection;
     }
 
 }

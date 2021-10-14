@@ -51,17 +51,16 @@ public class StadiumTable extends AbstractTable {
             stadiumId = array.getStadiumId();
             cityName = array.getTeam();
             zipCode = array.getZipCode();
-            fileOutput.println(stadium + "\\s*,\\s*" + stadiumId + "\\s*,\\s*" + cityName + "\\s*,\\s*" + zipCode);
+            fileOutput.println(stadium + ", " + stadiumId + ", " + cityName + ", " + zipCode);
         }
         fileOutput.close();
-        ;
     }
 
     public void addRow() {
         String stadium = JOptionPane.showInputDialog("Please enter the Stadium you want to add to the table");
         String stadiumId = JOptionPane.showInputDialog("Please enter the Id for " + stadium);
-        String cityName = JOptionPane.showInputDialog("Please enter the name of the city where the stadium is located");
-        String zipCode = JOptionPane.showInputDialog("Please enter the zip code the Stadium residse in:");
+        String cityName = JOptionPane.showInputDialog("Please enter the name of the Team that uses the stadium.");
+        String zipCode = JOptionPane.showInputDialog("Please enter the zip code the Stadium resides in:");
         if (counter < 100) {
             stadiums[counter] = new StadiumRow(stadium, stadiumId, cityName, zipCode);
             counter++;
@@ -97,13 +96,13 @@ public class StadiumTable extends AbstractTable {
     };
 
     public String findRow(String stadium) {
-        stadium.toLowerCase();
+        String stadiumName = stadium.toLowerCase();
         String row = "";
         StadiumRow array;
         for (int i = 1; i < counter; i++) {
             array = stadiums[i];
             String check = array.getStadiumName();
-            if (check.toLowerCase().equals(stadium)) {
+            if (check.toLowerCase().equals(stadiumName)) {
                 row = "Stadium: " + array.getStadiumName() + "\nTeam: " + array.getTeam() + "\nZip Code: " + array.getZipCode() + "\nStadium Id: " + array.getStadiumId();
                 break;
             } else {
