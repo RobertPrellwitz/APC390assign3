@@ -66,11 +66,9 @@ public class StadiumTable extends AbstractTable {
         int count = 0;
         while (!duplicate && count < counter){
             StadiumRow check = stadiums[count];
-            System.out.println( "Table Team: " + check.getTeam());
-            System.out.println("New Team" + newRow.getTeam());
-            duplicate = check.equals(newRow);
+            duplicate = check.equal(newRow);
             count++;
-        }
+         }
         if (duplicate){
             JOptionPane.showMessageDialog(null, "This a duplicate item - data can't be added");
         }

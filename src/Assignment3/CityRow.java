@@ -1,8 +1,8 @@
 package Assignment3;
 
 public class CityRow extends AbstractRow{
-    private String City;
-    private String id;
+    private String cityName;
+    private String cityId;
     private String population;
 
     private String [] cityRow = new String [3];
@@ -15,22 +15,28 @@ public class CityRow extends AbstractRow{
     }
 
     protected String getCityName(){
-        String cityName = cityRow[0];
+        cityName = cityRow[0];
         return cityName;
     }
 
     protected String getCityID(){
-        String cityId = cityRow[1];
+         cityId = cityRow[1];
         return cityId;
     }
 
     protected String getCityPop(){
-        String cityPop = cityRow[2];
-        return cityPop;
+        population = cityRow[2];
+        return population;
     }
-
-    public void equal(CityRow row){
-
+    /* This function checks to see if the city being entered already exists in the data table by
+    * comparing the City Name and City Id (duplicate City names can exist but not duplicate name and ID*/
+    public boolean equal(CityRow row){
+        boolean check = false;
+        if (this.getCityName().equals(row.getCityName()) &&
+                Integer.parseInt(this.getCityID())==Integer.parseInt(row.getCityID())){
+                check = true;
+        }
+        return check;
     }
 
 }

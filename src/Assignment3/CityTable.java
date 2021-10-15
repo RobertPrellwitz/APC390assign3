@@ -61,8 +61,20 @@ public class CityTable extends AbstractTable{
     public void addRow(){
         String city = JOptionPane.showInputDialog("Please enter the City you want to add to the table");
         String cityId = JOptionPane.showInputDialog("Please enter the Id for " + city);
-         String population = JOptionPane.showInputDialog("Please enter the population in millions for " + city);
-        if (counter < 100){
+        String population = JOptionPane.showInputDialog("Please enter the population in millions for " + city);
+        CityRow newRow = new CityRow(city, cityId, population);
+        boolean duplicate = false;
+        int count = 0;
+
+        while(!duplicate && count < counter){
+            CityRow check = cities[count];
+            duplicate = check.equal(newRow);
+            count++;
+        }
+        if (duplicate){
+            JOptionPane.showMessageDialog(null, newRow.getCityName() + " is a duplicate - data can't be added");
+        }
+         if (counter < 100){
             cities[counter]= new CityRow(city,cityId,population);
             counter++;
         }

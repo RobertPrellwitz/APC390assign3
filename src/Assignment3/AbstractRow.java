@@ -3,7 +3,7 @@ package Assignment3;
 public abstract class AbstractRow {
 
 
-    public boolean equals(){
+    public boolean equal(AbstractRow row){
         return false;
     }
 }
