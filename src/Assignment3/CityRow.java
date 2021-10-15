@@ -32,10 +32,14 @@ public class CityRow extends AbstractRow{
     * comparing the City Name and City Id (duplicate City names can exist but not duplicate name and ID*/
     public boolean equal(CityRow row){
         boolean check = false;
-        if (this.getCityName().equals(row.getCityName()) &&
-                Integer.parseInt(this.getCityID())==Integer.parseInt(row.getCityID())){
-                check = true;
+        if (Integer.parseInt(this.getCityID())==Integer.parseInt(row.getCityID())){
+            check = true;
         }
+//
+//        if (this.getCityName().equals(row.getCityName()) &&
+//                Integer.parseInt(this.getCityID())==Integer.parseInt(row.getCityID())){
+//                check = true;
+//        }
         return check;
     }
 

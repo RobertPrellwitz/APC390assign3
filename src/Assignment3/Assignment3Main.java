@@ -3,8 +3,8 @@ import javax.swing.JOptionPane;
 import java.io.IOException;
 
 /**
- * <p> Title: APC 390 Assignment #1 </p>
- * <p> Description: Interactive Table builder. Assign1Main
+ * <p> Title: APC 390 Assignment #3 </p>
+ * <p> Description: Interactive Table builder. Assign3Main
  *     - read a text file containing a table of data </p>
  * <p> Copyright: Copyright (c) 2021 </p>
  * <p> Company: UWEX APC </p>
@@ -77,7 +77,7 @@ public class Assignment3Main {
                     break;
                 case END:
                     JOptionPane.showMessageDialog(null, "Thank you for using our program."
-                            + "\nREP Computing Services. \n\n DON'T PANIC\n\n");
+                            + "\nREP Computing Services. \n\n DON'T PANIC Productions LLc\n\n");
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Invalid Input");
@@ -118,6 +118,7 @@ public class Assignment3Main {
                 break;
             case DISPLAY_TABLE:
                 JOptionPane.showMessageDialog(null,mytable.displayData());
+                break;
             case QUIT:
                 JOptionPane.showMessageDialog(null, "Returning to Main Menu");
                 break;

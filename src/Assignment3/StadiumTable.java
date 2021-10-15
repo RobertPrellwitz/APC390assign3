@@ -110,10 +110,10 @@ public class StadiumTable extends AbstractTable {
         String stadiumName = stadium.toLowerCase();
         String row = "";
         StadiumRow array;
-        for (int i = 1; i < counter; i++) {
+        for (int i = 0; i < counter; i++) {
             array = stadiums[i];
-            String check = array.getStadiumName();
-            if (check.toLowerCase().equals(stadiumName)) {
+            String check = array.getStadiumName().toLowerCase();
+            if (check.equals(stadiumName)) {
                 row = "Stadium: " + array.getStadiumName() + "\nTeam: " + array.getTeam() + "\nZip Code: " + array.getZipCode() + "\nStadium Id: " + array.getStadiumId();
                 break;
             } else {

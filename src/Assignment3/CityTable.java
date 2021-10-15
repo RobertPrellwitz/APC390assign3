@@ -108,10 +108,10 @@ public class CityTable extends AbstractTable{
     };
 
     public String findRow(String name){
-        name.toLowerCase();
+        name = name.toLowerCase();
         String row="";
         CityRow array;
-        for (int i = 1; i < counter; i++){
+        for (int i = 0; i < counter; i++){
             array = cities[i];
             String check = array.getCityName();
             if (check.toLowerCase().equals(name)){
