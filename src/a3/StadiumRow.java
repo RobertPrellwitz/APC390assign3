@@ -1,4 +1,4 @@
-package Assignment3;
+package a3;
 
 public class StadiumRow extends AbstractRow {
     private String stadiumName;
@@ -6,7 +6,7 @@ public class StadiumRow extends AbstractRow {
     private String teamName;
     private String zipCode;
 
-    private String [] stadiumRow = new String [4];
+    private final String[] stadiumRow = new String[4];
 
 //    StadiumRow(String stadium, int stadiumId, String teamName, int zipCode){
 //        this.stadiumName = stadium;
@@ -15,30 +15,30 @@ public class StadiumRow extends AbstractRow {
 //        this.zip = zipCode;
 //    }
 
-    StadiumRow(String Stadium, String StadiumId, String teamName, String zipCode){
+    StadiumRow(String Stadium, String StadiumId, String teamName, String zipCode) {
         stadiumRow[0] = Stadium;
         stadiumRow[1] = StadiumId;
         stadiumRow[2] = teamName;
         stadiumRow[3] = zipCode;
     }
 
-    protected String getStadiumName(){
-         stadiumName = stadiumRow[0];
+    protected String getStadiumName() {
+        stadiumName = stadiumRow[0];
         return stadiumName;
     }
 
-    protected String getStadiumId(){
-       stadiumId = stadiumRow[1];
-      return stadiumId;
+    protected String getStadiumId() {
+        stadiumId = stadiumRow[1];
+        return stadiumId;
     }
 
-    protected String getTeam(){
-         teamName = stadiumRow[2];
+    protected String getTeam() {
+        teamName = stadiumRow[2];
         return teamName;
     }
 
-    protected String getZipCode(){
-         zipCode = stadiumRow[3];
+    protected String getZipCode() {
+        zipCode = stadiumRow[3];
         return zipCode;
     }
 

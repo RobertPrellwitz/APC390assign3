@@ -33,3 +33,13 @@ src/.idea/vcs.xml
 src/APC390assign3.iml
 
 src/META-INF/MANIFEST.MF
+
+src/out/production/APC390assign3/.idea/misc.xml
+
+src/out/production/APC390assign3/.idea/modules.xml
+
+*.xml
+
+*.iml
+
+src/out/production/APC390assign3/META-INF/MANIFEST.MF

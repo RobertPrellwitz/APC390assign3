@@ -1,4 +1,4 @@
-package Assignment3;
+package a3;
 
 import javax.swing.*;
 import java.io.FileNotFoundException;
@@ -10,12 +10,12 @@ import java.util.Scanner;
 public class StadiumTable extends AbstractTable {
 
     private String header;
-    private static StadiumRow[] stadiums = new StadiumRow[100];
+    private static final StadiumRow[] stadiums = new StadiumRow[100];
     private static int counter = 0;
 
     public void loadTableFromFile(String fileName) throws IOException {
         Scanner loadFile = null;
-        loadFile = new Scanner(new FileReader(fileName));
+        loadFile = new Scanner(new FileReader("src\\" + fileName));
         String input;
         try {
             header = loadFile.nextLine();
@@ -61,18 +61,17 @@ public class StadiumTable extends AbstractTable {
         String stadiumId = JOptionPane.showInputDialog("Please enter the Id for " + stadium);
         String cityName = JOptionPane.showInputDialog("Please enter the name of the Team that uses the stadium.");
         String zipCode = JOptionPane.showInputDialog("Please enter the zip code the Stadium resides in:");
-        StadiumRow newRow = new StadiumRow(stadium,stadiumId,cityName,zipCode);
+        StadiumRow newRow = new StadiumRow(stadium, stadiumId, cityName, zipCode);
         boolean duplicate = false;
         int count = 0;
-        while (!duplicate && count < counter){
+        while (!duplicate && count < counter) {
             StadiumRow check = stadiums[count];
             duplicate = check.equal(newRow);
             count++;
-         }
-        if (duplicate){
-            JOptionPane.showMessageDialog(null, "This a duplicate item - data can't be added");
         }
-        else if (counter < 100) {
+        if (duplicate) {
+            JOptionPane.showMessageDialog(null, "This a duplicate item - data can't be added");
+        } else if (counter < 100) {
             stadiums[counter] = new StadiumRow(stadium, stadiumId, cityName, zipCode);
             counter++;
         } else {
@@ -80,31 +79,27 @@ public class StadiumTable extends AbstractTable {
         }
     }
 
-    ;
-
     public void removeRow() {
         int numberToRemoveFromTable = selection();
         StadiumRow array;
-        int temp =- 1;
+        int temp = -1;
         int range = counter;
         int number;
-        for (int i = 0; i < range; i++){
+        for (int i = 0; i < range; i++) {
             array = stadiums[i];
             number = Integer.parseInt(array.getStadiumId());
-            if (number == numberToRemoveFromTable){
+            if (number == numberToRemoveFromTable) {
                 temp = i;
                 break;
             }
         }
-        if (temp != -1)
-        {
-            for (int j = temp; j < (range -1); j++ )
-            {
-                stadiums[j] = stadiums[j+1];
+        if (temp != -1) {
+            for (int j = temp; j < (range - 1); j++) {
+                stadiums[j] = stadiums[j + 1];
             }
             counter--;
         }
-    };
+    }
 
     public String findRow(String stadium) {
         String stadiumName = stadium.toLowerCase();
@@ -124,16 +119,17 @@ public class StadiumTable extends AbstractTable {
         return row;
     }
 
-     public String displayData(){
-        String display=String.format("\n%-30s%-50s%-50s","Stadium Id","Stadium Name","Team Name");
+    public String displayData() {
+        String display = String.format("\n%-30s%-50s%-50s", "Stadium Id", "Stadium Name", "Team Name");
         StadiumRow array;
-        for(int i = 0; i < counter; i++){
+        for (int i = 0; i < counter; i++) {
             array = stadiums[i];
-            display = display + (String.format("\n%-30s%-50s%-50s" , array.getStadiumId(), array.getStadiumName(), array.getTeam()));
+            display = display + (String.format("\n%-30s%-50s%-50s", array.getStadiumId(), array.getStadiumName(), array.getTeam()));
         }
         return display;
     }
-    public int selection(){
+
+    public int selection() {
         int selection = 0;
         selection = Integer.parseInt(JOptionPane.showInputDialog(displayData()
                 + "\nPlease enter the Stadium ID you would like to remove:"));

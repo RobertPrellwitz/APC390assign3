@@ -1,11 +1,12 @@
-package Assignment3;
+package a3;
+
 import javax.swing.JOptionPane;
 import java.io.IOException;
 
 /**
  * <p> Title: APC 390 Assignment #3 </p>
  * <p> Description: Interactive Table builder. Assign3Main
- *     - read a text file containing a table of data </p>
+ * - read a text file containing a table of data </p>
  * <p> Copyright: Copyright (c) 2021 </p>
  * <p> Company: UWEX APC </p>
  *
@@ -43,17 +44,17 @@ public class Assignment3Main {
     static final String tableChoice = "There are the two table types available:\n"
             + "City Data & Stadium data.\n"
             + "Please select what you want to work on:\n"
-            + "   " + STADIUM +":  Stadium Data\n"
-            + "   " + CITY +":  City Data\n"
+            + "   " + STADIUM + ":  Stadium Data\n"
+            + "   " + CITY + ":  City Data\n"
             + "   " + END + ":  End Program";
 
     public static void main(String[] args) throws IOException {
-        JOptionPane.showMessageDialog(null,developerMessage);
+        JOptionPane.showMessageDialog(null, developerMessage);
         JOptionPane.showMessageDialog(null, welcomeMessage);
 
         int tableSelection = 0;
 
-        while (tableSelection!= END) {
+        while (tableSelection != END) {
             tableSelection = Integer.parseInt(JOptionPane.showInputDialog(tableChoice));
             AbstractTable myTable = tableSet(tableSelection);
             int userSelection = 0;
@@ -64,7 +65,7 @@ public class Assignment3Main {
         }
     }
 
-    private static AbstractTable tableSet(int tableChoice)throws Error {
+    private static AbstractTable tableSet(int tableChoice) throws Error {
         AbstractTable userTable = null;
 
         try {
@@ -84,8 +85,7 @@ public class Assignment3Main {
                     break;
             }
 
-        }
-        catch(Error exp) {
+        } catch (Error exp) {
             JOptionPane.showMessageDialog(null, "Error Selecting Table Type" + exp);
         }
         return userTable;
@@ -98,9 +98,9 @@ public class Assignment3Main {
                 String fileName = JOptionPane.showInputDialog("Please enter the name of the text file to load");
                 System.out.println("Opening the file '" + fileName + "'.");
                 try {
-                mytable.loadTableFromFile(fileName);}
-                catch(IOException exp){
-                    JOptionPane.showMessageDialog(null,"Error loading file: "+exp);
+                    mytable.loadTableFromFile(fileName);
+                } catch (IOException exp) {
+                    JOptionPane.showMessageDialog(null, "Error loading file: " + exp);
                 }
                 break;
             case SAVE:
@@ -119,7 +119,7 @@ public class Assignment3Main {
                 JOptionPane.showMessageDialog(null, mytable.findRow(name));
                 break;
             case DISPLAY_TABLE:
-                JOptionPane.showMessageDialog(null,mytable.displayData());
+                JOptionPane.showMessageDialog(null, mytable.displayData());
                 break;
             case QUIT:
                 JOptionPane.showMessageDialog(null, "Returning to Main Menu");
