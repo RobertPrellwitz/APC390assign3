@@ -22,7 +22,6 @@ public class CityTable extends AbstractTable {
         String input;
         try {
             int count = getCounter();
-            //header = loadFile.nextLine();
             setHeader(loadFile.nextLine());
             while (loadFile.hasNext()) {
                 if (count < 100) {
@@ -32,7 +31,6 @@ public class CityTable extends AbstractTable {
                     if (!isEmpty) {
                         String[] array = input.split("\\s*,\\s*", 3);
                         setRow(new CityRow(array[0], array[1], array[2]));
-                        //rowObjects[count] = new CityRow(array[0], array[1], array[2]);
                         setCounter(count++);
                     }
                 } else {
@@ -54,7 +52,6 @@ public class CityTable extends AbstractTable {
         fileOutput.println(getHeader());
 
         for (int i = 0; i < getCounter(); i++) {
-            //array = (CityRow) rowObjects[i];
             array = (CityRow) getRow(i);
             city = array.getCityName();
             cityId = array.getCityID();
@@ -74,7 +71,7 @@ public class CityTable extends AbstractTable {
         int currentTot = getCounter();
 
         while (!duplicate && count < currentTot) {
-            AbstractRow check = getRow(count);
+            CityRow check = (CityRow) getRow(count);
             duplicate = check.equal(newRow);
             count++;
         }
@@ -97,7 +94,6 @@ public class CityTable extends AbstractTable {
         int range = getCounter();
         int number;
         for (int i = 0; i < range; i++) {
-            //array = (CityRow) rowObjects[i];
             array = (CityRow) getRow(i);
             number = Integer.parseInt(array.getCityID());
             if (number == numberToRemoveFromTable) {
@@ -107,7 +103,6 @@ public class CityTable extends AbstractTable {
         }
         if (temp != -1) {
             for (int j = temp; j < (range - 1); j++) {
-                //rowObjects[j] = rowObjects[j + 1];
                 setRow(getRow(j+1),j);
             }
             range--;
@@ -138,7 +133,6 @@ public class CityTable extends AbstractTable {
         CityRow array;
         int count = getCounter();
         for (int i = 0; i < count; i++) {
-            //array = (CityRow) rowObjects[i];
             array = (CityRow) getRow(i);
             display.append(String.format("\n%-30s%-50s%-50s", array.getCityID(), array.getCityName(), array.getCityPop()));
         }

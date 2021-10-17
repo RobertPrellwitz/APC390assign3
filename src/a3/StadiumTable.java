@@ -19,6 +19,7 @@ public class StadiumTable extends AbstractTable {
         String input;
         try {
             int count = getCounter();
+            int duplicates = 0;
             setHeader(loadFile.nextLine());
             while (loadFile.hasNext()) {
                 if (count < 100) {
@@ -27,13 +28,21 @@ public class StadiumTable extends AbstractTable {
 
                     if (!isEmpty) {
                         String[] array = input.split("\\s*,\\s*", 4);
-                       setRow(new StadiumRow(array[0], array[1], array[2], array[3]));
-                        setCounter(count++);
+                        StadiumRow newRow = new StadiumRow(array[0], array[1], array[2], array[3]);
+                        boolean check = duplicate(newRow);
+                        if(!check){
+                            setRow(newRow);
+                            setCounter(count++);
+                        }
+                        else{duplicates++;}
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Data File has execeded the limit of the data Store");
                     break;
                 }
+            }
+            if(duplicates > 0){
+                JOptionPane.showMessageDialog(null,"There were duplicate records in  the data file: "+duplicates +" records not added to the table.");
             }
         } catch (Exception exp) {
             JOptionPane.showMessageDialog(null, exp + "\nThe file does not conform to the required data stucture:");
@@ -64,22 +73,34 @@ public class StadiumTable extends AbstractTable {
         String cityName = JOptionPane.showInputDialog("Please enter the name of the Team that uses the stadium.");
         String zipCode = JOptionPane.showInputDialog("Please enter the zip code the Stadium resides in:");
         StadiumRow newRow = new StadiumRow(stadium, stadiumId, cityName, zipCode);
-        boolean duplicate = false;
-        int count = 0; int currentTot= getCounter();
-        while (!duplicate && count < currentTot) {
-            AbstractRow check = getRow(count);
-            duplicate = check.equal(newRow);
-            count++;
-        }
+        int currentTot = getCounter();
+        boolean duplicate = duplicate(newRow);
+//        boolean duplicate = false;
+//        int count = 0; int currentTot= getCounter();
+//        while (!duplicate && count < currentTot) {
+//            AbstractRow check = getRow(count);
+//            duplicate = check.equal(newRow);
+//            count++;
+//        }
         if (duplicate) {
             JOptionPane.showMessageDialog(null, "This a duplicate item - data can't be added");
-        } else if (count < 100) {
+        } else if (currentTot < 100) {
             setRow( newRow);
             currentTot++;
             setCounter(currentTot);
         } else {
             JOptionPane.showMessageDialog(null, "The Data Store Is full - data can't be added");
         }
+    }
+    public boolean duplicate(StadiumRow newRow){
+        boolean duplicate = false;
+        int count = 0; int currentTot = getCounter();
+        while (!duplicate && count < currentTot) {
+            StadiumRow check = (StadiumRow) getRow(count);
+            duplicate = check.equal(newRow);
+            count++;
+        }
+        return duplicate;
     }
 
     public void removeRow() {
@@ -98,7 +119,6 @@ public class StadiumTable extends AbstractTable {
         }
         if (temp != -1) {
             for (int j = temp; j < (range - 1); j++) {
-                //rowObjects[j] = rowObjects[j + 1];
                 setRow(getRow(j+1),j);
             }
             range--;
@@ -129,7 +149,6 @@ public class StadiumTable extends AbstractTable {
         StadiumRow array;
         int count = getCounter();
         for (int i = 0; i < count; i++) {
-            //array = stadiums[i];
             array = (StadiumRow) getRow(i);
             display.append(String.format("\n%-30s%-50s%-50s", array.getStadiumId(), array.getStadiumName(), array.getTeam()));
         }
