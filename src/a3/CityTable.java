@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class CityTable extends AbstractTable {
 
     public CityTable(){
-        rowObjects = new CityRow[100];
+        //rowObjects = new CityRow[100];
     }
 
     public void loadTableFromFile(String fileName) throws IOException {
@@ -51,7 +51,8 @@ public class CityTable extends AbstractTable {
         fileOutput.println(getHeader());
 
         for (int i = 0; i < getCounter(); i++) {
-            array = (CityRow) rowObjects[i];
+            //array = (CityRow) rowObjects[i];
+            array = (CityRow) getRow(i);
             city = array.getCityName();
             cityId = array.getCityID();
             population = array.getCityPop();
@@ -78,7 +79,7 @@ public class CityTable extends AbstractTable {
         if (duplicate) {
             JOptionPane.showMessageDialog(null, newRow.getCityName() + " is a duplicate - data can't be added");
         }
-        if (count < 100) {
+        else if (count < 100) {
             //rowObjects[count] = new CityRow(city, cityId, population);
             //AbstractRow add = newRow;
             setRow(newRow);
@@ -106,7 +107,7 @@ public class CityTable extends AbstractTable {
         }
         if (temp != -1) {
             for (int j = temp; j < (range - 1); j++) {
-                rowObjects[j] = rowObjects[j + 1];
+                //rowObjects[j] = rowObjects[j + 1];
                 setRow(getRow(j+1),j);
             }
             range--;
@@ -122,7 +123,7 @@ public class CityTable extends AbstractTable {
         for (int i = 0; i < count; i++) {
             //array = (CityRow) rowObjects[i];
             array = (CityRow) getRow(i);
-            String check = array.getCityName();
+            String check = array.getCityName().toLowerCase();
             if (check.toLowerCase().equals(name)) {
                 row = "City: " + array.getCityName() + " City Id: " + array.getCityID() + " Population: " + array.getCityPop();
                 break;
@@ -150,7 +151,7 @@ public class CityTable extends AbstractTable {
     public int selection() {
         int selection = 0;
         selection = Integer.parseInt(JOptionPane.showInputDialog(displayData()
-                + "\nPlease enter the Stadium ID you would like to remove:"));
+                + "\nPlease enter the City ID you would like to remove:"));
         return selection;
     }
 

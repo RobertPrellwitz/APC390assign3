@@ -9,25 +9,26 @@ import java.util.Scanner;
 
 public class StadiumTable extends AbstractTable {
 
-    private String header;
-    private static final StadiumRow[] stadiums = new StadiumRow[100];
-    private static int counter = 0;
+    //private String header;
+    //private static final StadiumRow[] stadiums = new StadiumRow[100];
+    //private static int counter = 0;
 
     public void loadTableFromFile(String fileName) throws IOException {
         Scanner loadFile = null;
         loadFile = new Scanner(new FileReader("src\\" + fileName));
         String input;
         try {
-            header = loadFile.nextLine();
+            int count = getCounter();
+            setHeader(loadFile.nextLine());
             while (loadFile.hasNext()) {
-                if (counter < 100) {
+                if (count < 100) {
                     input = loadFile.nextLine();
                     boolean isEmpty = (input == null || input.trim().isEmpty());
 
                     if (!isEmpty) {
                         String[] array = input.split("\\s*,\\s*", 4);
-                        stadiums[counter] = new StadiumRow(array[0], array[1], array[2], array[3]);
-                        counter++;
+                       setRow(new StadiumRow(array[0], array[1], array[2], array[3]));
+                        setCounter(count++);
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Data File has execeded the limit of the data Store");
@@ -44,9 +45,10 @@ public class StadiumTable extends AbstractTable {
         PrintWriter fileOutput = new PrintWriter(fileName);
         String stadium, stadiumId, cityName, zipCode;
         StadiumRow array;
-        fileOutput.println(header);
-        for (int i = 0; i < counter; i++) {
-            array = stadiums[i];
+        fileOutput.println(getHeader());
+        for (int i = 0; i < getCounter(); i++) {
+            //array = stadiums[i];
+            array = (StadiumRow) getRow(i);
             stadium = array.getStadiumName();
             stadiumId = array.getStadiumId();
             cityName = array.getTeam();
@@ -63,17 +65,18 @@ public class StadiumTable extends AbstractTable {
         String zipCode = JOptionPane.showInputDialog("Please enter the zip code the Stadium resides in:");
         StadiumRow newRow = new StadiumRow(stadium, stadiumId, cityName, zipCode);
         boolean duplicate = false;
-        int count = 0;
-        while (!duplicate && count < counter) {
-            StadiumRow check = stadiums[count];
+        int count = 0; int currentTot= getCounter();
+        while (!duplicate && count < currentTot) {
+            AbstractRow check = getRow(count);
             duplicate = check.equal(newRow);
             count++;
         }
         if (duplicate) {
             JOptionPane.showMessageDialog(null, "This a duplicate item - data can't be added");
-        } else if (counter < 100) {
-            stadiums[counter] = new StadiumRow(stadium, stadiumId, cityName, zipCode);
-            counter++;
+        } else if (count < 100) {
+            setRow( newRow);
+            currentTot++;
+            setCounter(currentTot);
         } else {
             JOptionPane.showMessageDialog(null, "The Data Store Is full - data can't be added");
         }
@@ -83,10 +86,10 @@ public class StadiumTable extends AbstractTable {
         int numberToRemoveFromTable = selection();
         StadiumRow array;
         int temp = -1;
-        int range = counter;
+        int range = getCounter();
         int number;
         for (int i = 0; i < range; i++) {
-            array = stadiums[i];
+            array = (StadiumRow) getRow(i);
             number = Integer.parseInt(array.getStadiumId());
             if (number == numberToRemoveFromTable) {
                 temp = i;
@@ -95,9 +98,11 @@ public class StadiumTable extends AbstractTable {
         }
         if (temp != -1) {
             for (int j = temp; j < (range - 1); j++) {
-                stadiums[j] = stadiums[j + 1];
+                //rowObjects[j] = rowObjects[j + 1];
+                setRow(getRow(j+1),j);
             }
-            counter--;
+            range--;
+            setCounter(range);
         }
     }
 
@@ -105,8 +110,9 @@ public class StadiumTable extends AbstractTable {
         String stadiumName = stadium.toLowerCase();
         String row = "";
         StadiumRow array;
-        for (int i = 0; i < counter; i++) {
-            array = stadiums[i];
+        int count = getCounter();
+        for (int i = 0; i < count; i++) {
+            array = (StadiumRow) getRow(i);
             String check = array.getStadiumName().toLowerCase();
             if (check.equals(stadiumName)) {
                 row = "Stadium: " + array.getStadiumName() + "\nTeam: " + array.getTeam() + "\nZip Code: " + array.getZipCode() + "\nStadium Id: " + array.getStadiumId();
@@ -122,8 +128,10 @@ public class StadiumTable extends AbstractTable {
     public String displayData() {
         String display = String.format("\n%-30s%-50s%-50s", "Stadium Id", "Stadium Name", "Team Name");
         StadiumRow array;
-        for (int i = 0; i < counter; i++) {
-            array = stadiums[i];
+        int count = getCounter();
+        for (int i = 0; i < count; i++) {
+            //array = stadiums[i];
+            array = (StadiumRow) getRow(i);
             display = display + (String.format("\n%-30s%-50s%-50s", array.getStadiumId(), array.getStadiumName(), array.getTeam()));
         }
         return display;
