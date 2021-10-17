@@ -24,7 +24,8 @@ public class Assignment3Main {
     static final String welcomeMessage = "This program implements an interactive table builder.\n"
             + "You can add new rows or remove rows from tables.\n"
             + "You can also load a table from a file or save a current\n"
-            + "table to a file.\n";
+            + "table to a file.\n"
+            + "You can also view the current contents of the file.";
 
     static final String developerMessage = "Program enhanced and improved by:\n"
             + "Robert Prellwitz\n"
@@ -65,6 +66,7 @@ public class Assignment3Main {
         }
     }
 
+    // Method to determine which Table type the user wants to work with
     private static AbstractTable tableSet(int tableChoice) throws Error {
         AbstractTable userTable = null;
 
@@ -91,6 +93,7 @@ public class Assignment3Main {
         return userTable;
     }
 
+    // Method to manipulate the data table after the user selects a type
     private static void processSelection(AbstractTable mytable, int userSelection) throws IOException {
        // boolean save = false;
         switch (userSelection) {

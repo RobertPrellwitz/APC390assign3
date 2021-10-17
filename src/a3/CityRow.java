@@ -1,17 +1,19 @@
 package a3;
 
 public class CityRow extends AbstractRow {
+
+    // member variables
     private String cityName;
     private String cityId;
     private String population;
 
     private final String[] cityRow = new String[3];
 
+    // Constructor
     CityRow(String City, String cityId, String cityPop) {
         cityRow[0] = City;
         cityRow[1] = cityId;
         cityRow[2] = cityPop;
-
     }
 
     protected String getCityName() {
@@ -30,17 +32,13 @@ public class CityRow extends AbstractRow {
     }
 
     /* This function checks to see if the city being entered already exists in the data table by
-     * comparing the City Name and City Id (duplicate City names can exist but not duplicate name and ID*/
+     * comparing the City Id (duplicate City names can exist but not duplicate ID) */
+
     public boolean equal(CityRow row) {
         boolean check = false;
         if (Integer.parseInt(this.getCityID()) == Integer.parseInt(row.getCityID())) {
             check = true;
         }
-//
-//        if (this.getCityName().equals(row.getCityName()) &&
-//                Integer.parseInt(this.getCityID())==Integer.parseInt(row.getCityID())){
-//                check = true;
-//        }
         return check;
     }
 

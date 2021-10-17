@@ -1,11 +1,11 @@
 package a3;
 
 public class StadiumRow extends AbstractRow {
+   // class data members
     private String stadiumName;
     private String stadiumId;
     private String teamName;
     private String zipCode;
-
     private final String[] stadiumRow = new String[4];
 
 //    StadiumRow(String stadium, int stadiumId, String teamName, int zipCode){
@@ -14,7 +14,7 @@ public class StadiumRow extends AbstractRow {
 //        this.teamName = teamName;
 //        this.zip = zipCode;
 //    }
-
+    // Class constructor
     StadiumRow(String Stadium, String StadiumId, String teamName, String zipCode) {
         stadiumRow[0] = Stadium;
         stadiumRow[1] = StadiumId;
@@ -43,7 +43,7 @@ public class StadiumRow extends AbstractRow {
     }
 
     /// This checks to see if the Stadium being added is the same as another based on Team & StadiumId
-    /// This allows for a stadium to exist with multiple Teams and have a multiple listings based on ID and Team
+    /// This allows for a stadium to exist with multiple Teams and have a multiple listings based on a unique ID and Team
     public boolean equal(StadiumRow row) {
         boolean check = false;
         if (this.getTeam().equals(row.getTeam()) || Integer.parseInt(this.getStadiumId()) == Integer.parseInt(row.getStadiumId())) {
