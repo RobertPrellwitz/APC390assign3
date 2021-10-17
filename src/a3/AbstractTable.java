@@ -1,3 +1,7 @@
+/***************************
+ * @author Robert Prellwitz
+ * APC 390 Fall '21
+ **************************/
 package a3;
 
 import java.io.FileNotFoundException;
@@ -19,12 +23,13 @@ public abstract class AbstractTable {
     public void setCounter(int count){
         this.counter = count;
     }
+    public void incrementCounter (){this.counter = counter++;}
+    public void decrementCounter () {this.counter = counter--;}
     public int getCounter(){
         return counter;
     }
     public void setRow(AbstractRow row){
         this.tableRows[counter]= row;
-
     }
     public void setRow(AbstractRow row, int spot){
         this.tableRows[spot]=row;

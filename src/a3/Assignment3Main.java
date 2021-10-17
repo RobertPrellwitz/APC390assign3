@@ -1,3 +1,7 @@
+/***************************
+ * @author Robert Prellwitz
+ * APC 390 Fall '21
+ **************************/
 package a3;
 
 import javax.swing.JOptionPane;
@@ -5,15 +9,11 @@ import java.io.IOException;
 
 /**
  * <p> Title: APC 390 Assignment #3 </p>
- * <p> Description: Interactive Table builder. Assign3Main
- * - read a text file containing a table of data </p>
+ * <p> Description: Interactive Table builder. Assign3Main</p>
+ * <p> read a text file containing a table of data </p>
  * <p> Copyright: Copyright (c) 2021 </p>
  * <p> Company: UWEX APC </p>
- *
- * @author Robert Prellwitz
- * @author Anthony Varghese
- * @version 1.1
- */
+ **/
 
 public class Assignment3Main {
     static final int LOAD = 1, SAVE = 2, ADD_ROW = 3, REMOVE_ROW = 4, FIND_ROW = 5, DISPLAY_TABLE = 6, QUIT = 7;
