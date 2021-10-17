@@ -1,3 +1,7 @@
+/***************************
+ * @author Robert Prellwitz
+ * APC 390 Fall '21
+ **************************/
 package a3;
 
 public class StadiumRow extends AbstractRow {
