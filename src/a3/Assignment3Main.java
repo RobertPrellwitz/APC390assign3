@@ -92,7 +92,7 @@ public class Assignment3Main {
     }
 
     private static void processSelection(AbstractTable mytable, int userSelection) throws IOException {
-        boolean save = false;
+       // boolean save = false;
         switch (userSelection) {
             case LOAD:
                 String fileName = JOptionPane.showInputDialog("Please enter the name of the text file to load");
@@ -106,7 +106,7 @@ public class Assignment3Main {
             case SAVE:
                 fileName = JOptionPane.showInputDialog("Please enter the name of the text file to which to save");
                 mytable.saveTableToFile(fileName);
-                save = true;
+                //save = true;
                 break;
             case ADD_ROW:
                 mytable.addRow();

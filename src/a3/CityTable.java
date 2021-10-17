@@ -10,12 +10,11 @@ import java.util.Scanner;
 public class CityTable extends AbstractTable {
 
     public CityTable(){
-        //rowObjects = new CityRow[100];
+
     }
 
     public void loadTableFromFile(String fileName) throws IOException {
-        Scanner loadFile = null;
-        loadFile = new Scanner(new FileReader("src\\" + fileName));
+        Scanner loadFile = new Scanner(new FileReader("src\\" + fileName));
         String input;
         try {
             int count = getCounter();
@@ -72,7 +71,6 @@ public class CityTable extends AbstractTable {
 
         while (!duplicate && count < currentTot) {
             AbstractRow check = getRow(count);
-            //CityRow check = (CityRow) rowObjects[count];
             duplicate = check.equal(newRow);
             count++;
         }
@@ -80,8 +78,6 @@ public class CityTable extends AbstractTable {
             JOptionPane.showMessageDialog(null, newRow.getCityName() + " is a duplicate - data can't be added");
         }
         else if (count < 100) {
-            //rowObjects[count] = new CityRow(city, cityId, population);
-            //AbstractRow add = newRow;
             setRow(newRow);
             currentTot++;
             setCounter(currentTot);
@@ -121,7 +117,6 @@ public class CityTable extends AbstractTable {
         CityRow array;
         int count = getCounter();
         for (int i = 0; i < count; i++) {
-            //array = (CityRow) rowObjects[i];
             array = (CityRow) getRow(i);
             String check = array.getCityName().toLowerCase();
             if (check.toLowerCase().equals(name)) {
@@ -129,7 +124,6 @@ public class CityTable extends AbstractTable {
                 break;
             } else {
                 row = name + " not found!   Sorry!\nPlease try again!";
-                continue;
             }
         }
         return row;
@@ -149,10 +143,8 @@ public class CityTable extends AbstractTable {
 
 
     public int selection() {
-        int selection = 0;
-        selection = Integer.parseInt(JOptionPane.showInputDialog(displayData()
+        return Integer.parseInt(JOptionPane.showInputDialog(displayData()
                 + "\nPlease enter the City ID you would like to remove:"));
-        return selection;
     }
 
 }

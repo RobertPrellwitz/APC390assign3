@@ -9,13 +9,9 @@ import java.util.Scanner;
 
 public class StadiumTable extends AbstractTable {
 
-    //private String header;
-    //private static final StadiumRow[] stadiums = new StadiumRow[100];
-    //private static int counter = 0;
-
     public void loadTableFromFile(String fileName) throws IOException {
-        Scanner loadFile = null;
-        loadFile = new Scanner(new FileReader("src\\" + fileName));
+
+        Scanner loadFile = new Scanner(new FileReader("src\\" + fileName));
         String input;
         try {
             int count = getCounter();
@@ -119,28 +115,26 @@ public class StadiumTable extends AbstractTable {
                 break;
             } else {
                 row = "Sorry " + stadium + " not found!   Sorry!\nPlease try again!";
-                continue;
             }
         }
         return row;
     }
 
     public String displayData() {
-        String display = String.format("\n%-30s%-50s%-50s", "Stadium Id", "Stadium Name", "Team Name");
+        StringBuilder display = new StringBuilder(String.format("\n%-30s%-50s%-50s", "Stadium Id", "Stadium Name", "Team Name"));
         StadiumRow array;
         int count = getCounter();
         for (int i = 0; i < count; i++) {
             //array = stadiums[i];
             array = (StadiumRow) getRow(i);
-            display = display + (String.format("\n%-30s%-50s%-50s", array.getStadiumId(), array.getStadiumName(), array.getTeam()));
+            display.append(String.format("\n%-30s%-50s%-50s", array.getStadiumId(), array.getStadiumName(), array.getTeam()));
         }
-        return display;
+        return display.toString();
     }
 
     public int selection() {
-        int selection = 0;
-        selection = Integer.parseInt(JOptionPane.showInputDialog(displayData()
+
+        return Integer.parseInt(JOptionPane.showInputDialog(displayData()
                 + "\nPlease enter the Stadium ID you would like to remove:"));
-        return selection;
     }
 }

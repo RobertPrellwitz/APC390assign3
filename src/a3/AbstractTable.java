@@ -1,14 +1,12 @@
 package a3;
 
-import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public abstract class AbstractTable {
 
     private String header;
-    protected AbstractRow[] rowObjects = new AbstractRow[100];
-    private AbstractRow[] testRows = new AbstractRow[100];
+    private final AbstractRow[] testRows = new AbstractRow[100];
     private int counter = 0;
 
     public void loadTableFromFile(String fileName) throws IOException {
@@ -18,8 +16,7 @@ public abstract class AbstractTable {
     }
 
     public String findRow(String input) {
-        String row = "blank";
-        return row;
+        return "blank";
     }
     public String getHeader(){
         return header;
@@ -50,8 +47,7 @@ public abstract class AbstractTable {
     public void removeRow(){}
 
     public String displayData() {
-        String data = "";
-        return data;
+        return "";
     }
 
     //public int selection () {int select = 0; return select;}
