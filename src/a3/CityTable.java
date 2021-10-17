@@ -22,6 +22,7 @@ public class CityTable extends AbstractTable {
         String input;
         try {
             int count = getCounter();
+            int duplicates = 0;
             setHeader(loadFile.nextLine());
             while (loadFile.hasNext()) {
                 if (count < 100) {
@@ -30,13 +31,21 @@ public class CityTable extends AbstractTable {
 
                     if (!isEmpty) {
                         String[] array = input.split("\\s*,\\s*", 3);
-                        setRow(new CityRow(array[0], array[1], array[2]));
-                        setCounter(count++);
+                        CityRow newRow = new CityRow(array[0], array[1], array[2]);
+                        boolean check = duplicate(newRow);
+                        if(!check){
+                            setRow(newRow);
+                            setCounter(count++);
+                        }
+                        else{duplicates++;}
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Data File has execeded the limit of the data Store");
                     break;
                 }
+            }
+            if(duplicates > 0){
+                JOptionPane.showMessageDialog(null,"There were duplicate records in  the data file: "+duplicates +" records not added to the table.");
             }
         } catch (Exception exp) {
             JOptionPane.showMessageDialog(null, exp + "\nThe file does not conform to the required data stucture:");
@@ -66,25 +75,29 @@ public class CityTable extends AbstractTable {
         String cityId = JOptionPane.showInputDialog("Please enter the Id for " + city);
         String population = JOptionPane.showInputDialog("Please enter the population in millions for " + city);
         CityRow newRow = new CityRow(city, cityId, population);
-        boolean duplicate = false;
-        int count = 0;
         int currentTot = getCounter();
-
-        while (!duplicate && count < currentTot) {
-            CityRow check = (CityRow) getRow(count);
-            duplicate = check.equal(newRow);
-            count++;
-        }
+        boolean duplicate = duplicate(newRow);
         if (duplicate) {
             JOptionPane.showMessageDialog(null, newRow.getCityName() + " is a duplicate - data can't be added");
         }
-        else if (count < 100) {
+        else if (currentTot < 100) {
             setRow(newRow);
             currentTot++;
             setCounter(currentTot);
         } else {
             JOptionPane.showMessageDialog(null, "The Data Store Is full - data can't be added");
         }
+    }
+
+    public boolean duplicate(CityRow newRow){
+        boolean duplicate = false;
+        int count = 0; int currentTot = getCounter();
+        while (!duplicate && count < currentTot) {
+            CityRow check = (CityRow) getRow(count);
+            duplicate = check.equal(newRow);
+            count++;
+        }
+        return duplicate;
     }
 
     public void removeRow() {

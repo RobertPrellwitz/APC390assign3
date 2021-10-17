@@ -13,6 +13,8 @@ import java.util.Scanner;
 
 public class StadiumTable extends AbstractTable {
 
+    public StadiumTable(){};
+
     public void loadTableFromFile(String fileName) throws IOException {
 
         Scanner loadFile = new Scanner(new FileReader("src\\" + fileName));
@@ -56,7 +58,6 @@ public class StadiumTable extends AbstractTable {
         StadiumRow array;
         fileOutput.println(getHeader());
         for (int i = 0; i < getCounter(); i++) {
-            //array = stadiums[i];
             array = (StadiumRow) getRow(i);
             stadium = array.getStadiumName();
             stadiumId = array.getStadiumId();
@@ -75,13 +76,6 @@ public class StadiumTable extends AbstractTable {
         StadiumRow newRow = new StadiumRow(stadium, stadiumId, cityName, zipCode);
         int currentTot = getCounter();
         boolean duplicate = duplicate(newRow);
-//        boolean duplicate = false;
-//        int count = 0; int currentTot= getCounter();
-//        while (!duplicate && count < currentTot) {
-//            AbstractRow check = getRow(count);
-//            duplicate = check.equal(newRow);
-//            count++;
-//        }
         if (duplicate) {
             JOptionPane.showMessageDialog(null, "This a duplicate item - data can't be added");
         } else if (currentTot < 100) {
